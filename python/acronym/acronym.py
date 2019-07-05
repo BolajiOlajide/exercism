@@ -1,6 +1,9 @@
-def abbreviate(words):
-    abbr = ''
-    splitted_word = words.split(' ')
-    for word in splitted_word:
-        abbr += ''.join([i[0] for i in word.split('-') if len(i) > 0])
-    return abbr.upper()
+import re
+
+
+def abbreviate(sentence):
+    pattern = r'\b[a-zA-Z]'
+    non_string = r'[^A-Za-z -]'
+    clean_sentence = re.sub(non_string, '', sentence)
+    abbreviation = re.findall(pattern, clean_sentence)
+    return ''.join(abbreviation).upper()
