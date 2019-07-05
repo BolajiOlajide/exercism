@@ -1,3 +1,13 @@
 class HighScores(object):
     def __init__(self, scores):
-        pass
+        self.scores = scores
+
+    def latest(self):
+        return self.scores[-1]
+
+    def personal_best(self):
+        return max(self.scores)
+
+    def personal_top_three(self):
+        sorted_unique_scores = sorted(self.scores, reverse=True)
+        return sorted_unique_scores[:3]
