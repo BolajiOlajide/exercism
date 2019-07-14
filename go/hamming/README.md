@@ -29,7 +29,7 @@ nucleotides are different from their equivalent in the other string.
 
 The Hamming distance between these two DNA strands is 7.
 
-# Implementation notes
+## Implementation notes
 
 The Hamming distance is only defined for sequences of equal length, so
 an attempt to calculate it between sequences of different lengths should
@@ -39,8 +39,7 @@ exception vs returning a special value) may differ between languages.
 You may be wondering about the `cases_test.go` file. We explain it in the
 [leap exercise][leap-exercise-readme].
 
-[leap-exercise-readme]: https://github.com/exercism/go/blob/master/exercises/leap/README.md 
-
+[leap-exercise-readme]: https://github.com/exercism/go/blob/master/exercises/leap/README.md
 
 ## Running the tests
 
@@ -64,4 +63,5 @@ you're having trouble, please visit the exercism.io [Go language page](http://ex
 The Calculating Point Mutations problem at Rosalind [http://rosalind.info/problems/hamm/](http://rosalind.info/problems/hamm/)
 
 ## Submitting Incomplete Solutions
+
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
