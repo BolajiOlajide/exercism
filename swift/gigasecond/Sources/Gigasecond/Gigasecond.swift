@@ -7,10 +7,10 @@ struct Gigasecond {
     init?(from stringDate: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        guard let from = dateFormatter.date(from: stringDate) else {
+        guard let dateObject = dateFormatter.date(from: stringDate) else {
             return nil
         }
-        self.from = dateFormatter.date(from: stringDate)
+        self.from = dateObject
     }
 
     var description: String {
