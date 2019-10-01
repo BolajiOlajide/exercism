@@ -5,7 +5,7 @@
 
 export const colorCode = (color) => colorObject[color]
 
-const colorObject = {
+export const colorObject = {
     black: 0,
     brown: 1,
     red: 2,
