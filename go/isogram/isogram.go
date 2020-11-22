@@ -7,12 +7,10 @@ import (
 
 // IsIsogram returns a boolean to determine if the argument is an isogram
 func IsIsogram(input string) bool {
-	inputInByte := []byte(strings.ToLower(input))
-
 	invalidCharRegex := regexp.MustCompile(`[- ]`)
-	sanitizedInput := invalidCharRegex.ReplaceAll(inputInByte, []byte(""))
+	sanitizedInput := invalidCharRegex.ReplaceAllString(strings.ToLower(input), "")
 
-	var tempMap = make(map[byte]int)
+	var tempMap = make(map[rune]int)
 
 	for _, char := range sanitizedInput {
 		if tempMap[char] == 0 {
