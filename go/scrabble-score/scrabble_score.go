@@ -1,6 +1,6 @@
 package scrabble
 
-import "strings"
+import "unicode"
 
 var wordScores = map[rune]int{
 	'A': 1,
@@ -33,12 +33,11 @@ var wordScores = map[rune]int{
 
 // Score returns the scrabble score for a letter
 func Score(word string) int {
-	var formattedWord = strings.Trim(word, " ")
-	formattedWord = strings.ToUpper(formattedWord)
+	var formattedWord = []rune(word)
 	wordScore := 0
 
 	for _, charCode := range formattedWord {
-		wordScore += wordScores[charCode]
+		wordScore += wordScores[unicode.ToUpper(charCode)]
 	}
 
 	return wordScore
