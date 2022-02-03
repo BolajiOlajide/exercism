@@ -1,54 +1,43 @@
 package robotname
 
 import (
-	"crypto/rand"
 	"errors"
-	"log"
-	"math/big"
+	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // Define the Robot type here.
+
+// Robot representation of the robot we're designing
 type Robot struct {
 	name string
 }
 
+var random = rand.New(rand.NewSource(time.Now().UnixNano()))
 var charset = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 var charsetLength = len(charset)
-var maxNameLength = 5
 
 var cache map[string]bool
 
-func generateRandomInt(max int64) (int64, error) {
-	nBig, err := rand.Int(rand.Reader, big.NewInt(max))
-	if err != nil {
-		log.Println(err)
-		return 0, err
-	}
-	return nBig.Int64(), nil
+func generateRandomInt(min, max int) int {
+	return random.Intn(max-min) + min
 }
 
-func generateRandomName() (name string, err error) {
-	for idx := 1; idx <= maxNameLength; idx++ {
-		if idx < 3 {
-			random, err := generateRandomInt(int64(charsetLength))
-			if err != nil {
-				return "", err
-			}
-			name += string(charset[random])
-		} else {
-			random, err := generateRandomInt(int64(9))
-			if err != nil {
-				return "", err
-			}
-			name += strconv.Itoa(int(random))
-		}
+func generateRandomName() (name string) {
+	for idx := 1; idx <= 2; idx++ {
+		randomNumber := generateRandomInt(0, charsetLength-1)
+		name += string(charset[randomNumber])
 	}
 
-	return name, err
+	randomNumber := generateRandomInt(100, 999)
+	name += strconv.Itoa(randomNumber)
+
+	return name
 }
 
+// Name get the name of the robot
 func (r *Robot) Name() (string, error) {
 	if r.name != "" {
 		return r.name, nil
@@ -57,15 +46,11 @@ func (r *Robot) Name() (string, error) {
 	var count int
 
 	for {
-		name, err := generateRandomName()
-
-		if err != nil {
-			return "", err
-		}
+		name := generateRandomName()
 
 		count++
 
-		if count > 1000 {
+		if count > 1000000 {
 			return "", errors.New("Retried name generation ten times and could not get unique name")
 		}
 
@@ -80,6 +65,7 @@ func (r *Robot) Name() (string, error) {
 	return r.name, nil
 }
 
+// Reset changes the name of a robot to an empty string
 func (r *Robot) Reset() {
 	r.name = ""
 }
